@@ -4,12 +4,23 @@ import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
 import { ThemedText } from "./ThemedText";
 import { ThemedView } from "./ThemedView";
 
-function Button({ text, onClick }: { text: string; onClick: () => void }) {
+function Button({
+  text,
+  onClick,
+  style,
+}: {
+  text: string;
+  onClick: () => void;
+  style?: any;
+}) {
   const theme = useColorScheme() ?? "light";
   return (
-    <TouchableOpacity onPress={onClick}>
+    <TouchableOpacity onPress={onClick} style={style}>
       <ThemedView
-        style={theme === "light" ? styles.buttonLight : styles.buttonDark}
+        style={[
+          theme === "light" ? styles.buttonLight : styles.buttonDark,
+          style,
+        ]}
       >
         <ThemedText
           style={theme === "light" ? styles.textLight : styles.textDark}
