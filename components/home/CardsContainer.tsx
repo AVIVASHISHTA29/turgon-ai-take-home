@@ -3,8 +3,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { ThemedView } from "../common/ThemedView";
 import Cards from "./Cards";
-
-export default function CardsContainer() {
+export default function CardsContainer(): JSX.Element {
   return (
     <ThemedView style={styles.flexContainer}>
       {cards.map((card, i) => (

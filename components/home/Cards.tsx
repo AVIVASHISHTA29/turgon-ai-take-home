@@ -1,5 +1,5 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
-import React, { memo, useState } from "react";
+import React, { useState } from "react";
 import { Image, Modal, Pressable, StyleSheet } from "react-native";
 import Button from "../common/Button";
 import { ThemedText } from "../common/ThemedText";
@@ -11,7 +11,11 @@ export interface CardsInterface {
   imgSrc: string;
 }
 
-const CardContent = memo(({ heading, desc, imgSrc }: CardsInterface) => (
+const CardContent = ({
+  heading,
+  desc,
+  imgSrc,
+}: CardsInterface): JSX.Element => (
   <ThemedView>
     <Image source={{ uri: imgSrc }} style={styles.image} />
     <ThemedView style={styles.innerCard}>
@@ -21,9 +25,9 @@ const CardContent = memo(({ heading, desc, imgSrc }: CardsInterface) => (
       </ThemedText>
     </ThemedView>
   </ThemedView>
-));
+);
 
-const Cards = memo(({ heading, desc, imgSrc }: CardsInterface) => {
+const Cards = ({ heading, desc, imgSrc }: CardsInterface): JSX.Element => {
   const borderColor = useThemeColor({}, "borderColor");
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -57,7 +61,7 @@ const Cards = memo(({ heading, desc, imgSrc }: CardsInterface) => {
       </Modal>
     </>
   );
-});
+};
 
 const styles = StyleSheet.create({
   image: {

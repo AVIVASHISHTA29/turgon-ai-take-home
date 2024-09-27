@@ -5,13 +5,12 @@ import Button from "../common/Button";
 import { ThemedText } from "../common/ThemedText";
 import { ThemedView } from "../common/ThemedView";
 
-function QRModal({
-  visible,
-  toggleModal,
-}: {
+interface QRModalInterface {
   visible: boolean;
   toggleModal: () => void;
-}) {
+}
+
+const QRModal = ({ visible, toggleModal }: QRModalInterface): JSX.Element => {
   return (
     <Modal
       visible={visible}
@@ -32,7 +31,7 @@ function QRModal({
       </ThemedView>
     </Modal>
   );
-}
+};
 
 export default QRModal;
 

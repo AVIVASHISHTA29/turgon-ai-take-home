@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { StyleSheet, useColorScheme } from "react-native";
 import { FloatingAction } from "react-native-floating-action";
 
@@ -40,7 +40,7 @@ export default function HomeScreen() {
     setQrModalVisible(!qrModalVisible);
   };
 
-  const actionPress = (name: string | undefined): void => {
+  const actionPress = useCallback((name: string | undefined): void => {
     switch (name) {
       case ActionButtonEnum.QR_ACTION_BUTTON:
         toggleQrModal();
@@ -48,7 +48,7 @@ export default function HomeScreen() {
       default:
         break;
     }
-  };
+  }, []);
 
   return (
     <>
