@@ -12,7 +12,7 @@ export default function ProfileScreen() {
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
       headerImage={
-        <Ionicons size={310} name="code-slash" style={styles.headerImage} />
+        <Ionicons size={310} name="person-outline" style={styles.headerImage} />
       }
     >
       <ThemedView style={styles.titleContainer}>
