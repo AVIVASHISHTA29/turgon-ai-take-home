@@ -15,33 +15,34 @@ import { images } from "@/constants/home/homeData";
 enum ActionButtonEnum {
   QR_ACTION_BUTTON = "QR_ACTION_BUTTON",
 }
+
+const actions = [
+  {
+    text: "Open QR Code",
+    icon: (
+      <ThemedIcon
+        name="qr-code"
+        size={24}
+        style={{
+          color: Colors.dark.text,
+        }}
+      />
+    ),
+    name: ActionButtonEnum.QR_ACTION_BUTTON,
+    position: 1,
+    color: Colors.dark.background,
+    buttonSize: 50,
+  },
+];
+
 export default function HomeScreen() {
-  const [qrModalVisible, setQrModalVisible] = useState(false);
+  const [qrModalVisible, setQrModalVisible] = useState<boolean>(false);
 
-  const actions = [
-    {
-      text: "Open QR Code",
-      icon: (
-        <ThemedIcon
-          name="qr-code"
-          size={24}
-          style={{
-            color: Colors.dark.text,
-          }}
-        />
-      ),
-      name: ActionButtonEnum.QR_ACTION_BUTTON,
-      position: 1,
-      color: Colors.dark.background,
-      buttonSize: 50,
-    },
-  ];
-
-  const toggleQrModal = () => {
+  const toggleQrModal = (): void => {
     setQrModalVisible(!qrModalVisible);
   };
 
-  const actionPress = (name: string | undefined) => {
+  const actionPress = (name: string | undefined): void => {
     switch (name) {
       case ActionButtonEnum.QR_ACTION_BUTTON:
         toggleQrModal();
@@ -54,7 +55,10 @@ export default function HomeScreen() {
   return (
     <>
       <ParallaxScrollView
-        headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
+        headerBackgroundColor={{
+          light: Colors.light.background,
+          dark: Colors.dark.background,
+        }}
         headerImage={<ImageCarousel data={images} />}
       >
         <ThemedView style={styles.parentContainer}>
@@ -62,15 +66,12 @@ export default function HomeScreen() {
           <CardsContainer />
         </ThemedView>
       </ParallaxScrollView>
-
-      {/* Floating Action Button */}
       <FloatingAction
         actions={actions}
         onPressItem={(name) => actionPress(name)}
         position="right"
         color={Colors.dark.background}
       />
-
       <QRModal visible={qrModalVisible} toggleModal={toggleQrModal} />
     </>
   );
