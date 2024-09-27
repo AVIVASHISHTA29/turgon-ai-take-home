@@ -1,4 +1,4 @@
-import { TabBarIcon } from "@/components/navigation/TabBarIcon";
+import { ThemedIcon } from "@/components/common/ThemedIcon";
 import { TabHeader } from "@/components/tabs/TabHeader";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
@@ -71,9 +71,14 @@ export default function TabLayout() {
           options={{
             title: tab.title,
             tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon
+              <ThemedIcon
+                style={{
+                  marginBottom: -4,
+                  color: focused
+                    ? Colors[colorScheme ?? "light"].tabIconSelected
+                    : color,
+                }}
                 name={focused ? tab.iconFocused : tab.iconUnfocused}
-                color={color}
               />
             ),
           }}

@@ -1,11 +1,11 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Image, Platform, StyleSheet } from "react-native";
 
-import { Collapsible } from "@/components/Collapsible";
-import { ExternalLink } from "@/components/ExternalLink";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
+import { Collapsible } from "@/components/common/Collapsible";
+import { ExternalLink } from "@/components/common/ExternalLink";
+import ParallaxScrollView from "@/components/common/ParallaxScrollView";
+import { ThemedText } from "@/components/common/ThemedText";
+import { ThemedView } from "@/components/common/ThemedView";
 
 export default function EventsScreen() {
   return (

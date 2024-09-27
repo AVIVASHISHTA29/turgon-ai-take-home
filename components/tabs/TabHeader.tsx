@@ -1,55 +1,48 @@
-import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { Ionicons } from "@expo/vector-icons";
-import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
+import { ThemedIcon } from "../common/ThemedIcon";
+import { ThemedText } from "../common/ThemedText";
+import { ThemedView } from "../common/ThemedView";
 
 export const TabHeader = () => {
   const colorScheme = useColorScheme();
   return (
     <SafeAreaView>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: 16,
-          paddingVertical: 20,
-          backgroundColor: Colors[colorScheme ?? "light"].background,
-          borderBottomWidth: 0.5,
-          borderBottomColor: Colors[colorScheme ?? "light"].borderColor,
-        }}
-      >
+      <ThemedView style={styles.header}>
         <TouchableOpacity onPress={() => alert("Dropdown clicked!")}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text
+          <ThemedView style={{ flexDirection: "row", alignItems: "center" }}>
+            <ThemedText
               style={{
                 fontSize: 18,
                 fontWeight: "bold",
-                color: Colors[colorScheme ?? "light"].text,
               }}
             >
               Q-Gurgaon
-            </Text>
-            <Ionicons
+            </ThemedText>
+            <ThemedIcon
               name="chevron-down"
               size={18}
               style={{
                 marginLeft: 4,
-                color: Colors[colorScheme ?? "light"].text,
               }}
             />
-          </View>
+          </ThemedView>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => alert("Search clicked!")}>
-          <Ionicons
-            name="search"
-            size={22}
-            style={{
-              color: Colors[colorScheme ?? "light"].text,
-            }}
-          />
+          <ThemedIcon name="search" size={22} />
         </TouchableOpacity>
-      </View>
+      </ThemedView>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 16,
+    paddingVertical: 20,
+    borderBottomWidth: 0.5,
+  },
+});
