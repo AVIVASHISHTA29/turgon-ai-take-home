@@ -1,6 +1,7 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
-import React from "react";
-import { Image, StyleSheet } from "react-native";
+import React, { memo, useState } from "react";
+import { Image, Modal, Pressable, StyleSheet } from "react-native";
+import Button from "../common/Button";
 import { ThemedText } from "../common/ThemedText";
 import { ThemedView } from "../common/ThemedView";
 
@@ -9,26 +10,54 @@ export interface CardsInterface {
   desc: string;
   imgSrc: string;
 }
-export default function Cards({ heading, desc, imgSrc }: CardsInterface) {
+
+const CardContent = memo(({ heading, desc, imgSrc }: CardsInterface) => (
+  <ThemedView>
+    <Image source={{ uri: imgSrc }} style={styles.image} />
+    <ThemedView style={styles.innerCard}>
+      <ThemedText type="defaultSemiBold">{heading}</ThemedText>
+      <ThemedText type="default" numberOfLines={2} ellipsizeMode="tail">
+        {desc}
+      </ThemedText>
+    </ThemedView>
+  </ThemedView>
+));
+
+const Cards = memo(({ heading, desc, imgSrc }: CardsInterface) => {
   const borderColor = useThemeColor({}, "borderColor");
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => setModalVisible(!modalVisible);
 
   return (
-    <ThemedView style={[styles.cardContainer, { borderColor }]}>
-      <Image
-        source={{
-          uri: imgSrc,
-        }}
-        style={styles.image}
-      />
-      <ThemedView style={styles.innerCard}>
-        <ThemedText type="defaultSemiBold">{heading}</ThemedText>
-        <ThemedText type="default" numberOfLines={2} ellipsizeMode="tail">
-          {desc}
-        </ThemedText>
-      </ThemedView>
-    </ThemedView>
+    <>
+      <Pressable
+        onPress={toggleModal}
+        style={[styles.cardContainer, { borderColor }]}
+      >
+        <CardContent heading={heading} desc={desc} imgSrc={imgSrc} />
+      </Pressable>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={toggleModal}
+      >
+        <ThemedView style={styles.modalContainer}>
+          <ThemedView style={styles.modalContent}>
+            <Image source={{ uri: imgSrc }} style={styles.modalImage} />
+            <ThemedView style={styles.innerCard}>
+              <ThemedText type="subtitle">{heading}</ThemedText>
+              <ThemedText type="default">{desc}</ThemedText>
+              <Button text="Close" onClick={toggleModal} />
+            </ThemedView>
+          </ThemedView>
+        </ThemedView>
+      </Modal>
+    </>
   );
-}
+});
 
 const styles = StyleSheet.create({
   image: {
@@ -48,5 +77,25 @@ const styles = StyleSheet.create({
   },
   innerCard: {
     padding: 8,
+    gap: 6,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    width: "80%",
+    padding: 16,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  modalImage: {
+    width: "100%",
+    height: 200,
+    borderRadius: 10,
   },
 });
+
+export default Cards;
