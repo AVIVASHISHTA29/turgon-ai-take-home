@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, useColorScheme } from "react-native";
 import { FloatingAction } from "react-native-floating-action";
 
 import ImageCarousel from "@/components/common/ImageCarousel";
@@ -36,6 +36,7 @@ const actions = [
 ];
 
 export default function HomeScreen() {
+  const colorScheme = useColorScheme() ?? "light";
   const [qrModalVisible, setQrModalVisible] = useState<boolean>(false);
 
   const toggleQrModal = (): void => {
@@ -70,7 +71,15 @@ export default function HomeScreen() {
         actions={actions}
         onPressItem={(name) => actionPress(name)}
         position="right"
-        color={Colors.dark.background}
+        color={Colors[colorScheme].text}
+        floatingIcon={
+          <ThemedIcon
+            name="add"
+            size={24}
+            style={{ color: Colors[colorScheme].background }}
+          />
+        }
+        overlayColor="rgba(0, 0, 0, 0.7)"
       />
       <QRModal visible={qrModalVisible} toggleModal={toggleQrModal} />
     </>
