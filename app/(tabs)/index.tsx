@@ -11,10 +11,7 @@ import CardsContainer from "@/components/home/CardsContainer";
 import QRModal from "@/components/home/QRModal";
 import { Colors } from "@/constants/Colors";
 import { images } from "@/constants/home/homeData";
-
-enum ActionButtonEnum {
-  QR_ACTION_BUTTON = "QR_ACTION_BUTTON",
-}
+import { ActionButtonEnum } from "@/enums/ActionButton";
 
 const actions = [
   {
